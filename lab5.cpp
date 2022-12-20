@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-enum kind
+enum petKind
 {
     DOG, CAT, PARROT, TURTLE, HAMSTER
 };
@@ -32,9 +32,10 @@ public:
     
     bool isPolite ()
     {
+        int helloLenght = 5;
         bool check = false;
-        for (int n = 0; n <= greeting.length()-5; n++) {
-        if (greeting.substr(n, 5)=="Hello"){
+        for (int n = 0; n <= greeting.length()-helloLenght; n++) {
+        if (greeting.substr(n, helloLenght)=="Hello"){
             check = true;
             break;
         }
@@ -62,10 +63,10 @@ class Home
 {
 private:
 
-vector<Pet> somePet;
+vector<Pet> somePets;
 public:
-    Home(vector<Pet> somePet){
-        this->somePet = somePet;
+    Home(vector<Pet> somePets){
+        this->somePets = somePets;
         cout << "AAAAAAAA"<<endl;
     }
     
@@ -87,16 +88,16 @@ void areFriends (vector<Pet> pets){
     cout << endl;
 }
 
-void ageSort (vector<Pet> *somePet){
-   sort(somePet->begin(), somePet->end(), [](Pet &e1, Pet &e2){
-        return e1.getAge() < e2.getAge();
+void ageSort (vector<Pet> *somePets){
+   sort(somePets->begin(), somePets->end(), [](Pet &first, Pet &second){
+        return first.getAge() < second.getAge();
     }); 
 }
 
-void print (vector<Pet> somePet) {
-    for (int i = 0; i < somePet.size(); i++)
+void printPets (vector<Pet> somePets) {
+    for (int i = 0; i < somePets.size(); i++)
     {
-        cout << somePet[i].getAge() << "\t"<< somePet[i].getName() << endl;
+        cout << somePets[i].getAge() << "\t"<< somePets[i].getName() << endl;
     }
     cout << endl;
 }
@@ -107,12 +108,12 @@ int main(){
     Pet parrot("Kesha", PARROT, 1, "Hello stupid human!", 1);
     Pet turtle("Anton", TURTLE, 112, " *none*", 3);
     Pet hamster("Stepa", HAMSTER, 2, "pipipi", 1);
-    vector<Pet> somePet {dog, cat, parrot, turtle, hamster};
+    vector<Pet> somePets {dog, cat, parrot, turtle, hamster};
     vector<Pet> pets {parrot, hamster, dog, cat};
-    ageSort(&somePet);
-    print(somePet); 
+    ageSort(&somePets);
+    printPets(somePets); 
     areFriends(pets);
-    Home SweetHome(somePet);
+    Home SweetHome(somePets);
     cout << parrot.isPolite() << endl;
     return 0;
 }
