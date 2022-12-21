@@ -3,25 +3,10 @@
 #include<math.h>
 #include<vector>
 #include <algorithm>
+#include"lab5Header.h"
 using namespace std;
 
-enum petKind
-{
-    DOG, CAT, PARROT, TURTLE, HAMSTER
-};
-
-class Pet
-{
-private:
-string name;
-int breed;
-int age;
-string greeting;
-int mass;
-
-public:
-    Pet(string name, int breed, int age, string greeting, int mass)
-    {
+Pet::Pet(string name, int breed, int age, string greeting, int mass){
         this -> name = name;
         this -> breed = breed;
         this -> age = age;
@@ -29,8 +14,7 @@ public:
         this -> mass = mass;
         //cout << "it work"<< endl;
     };
-    
-    bool isPolite ()
+bool Pet::isPolite (Pet pet)
     {
         int helloLenght = 5;
         bool check = false;
@@ -40,29 +24,15 @@ public:
             break;
         }
         }
-        if (check) cout << name << ": is polite" << endl;
-        else cout << name << ": isn't polite" << endl; 
+        if (check) cout << pet.getName() << ": is polite" << endl;
+        else cout << pet.getName() << ": isn't polite" << endl; 
         cout << endl;  
     return check;
     }
-    
-    int getAge (){
-        return age;
-    }
-    
-    string getName(){
-        return name;
-    }
-    
-    ~Pet(){ 
-        //cout << "done"<< endl;
-        };
-};
 
 class Home
 {
 private:
-
 vector<Pet> somePets;
 public:
     Home(vector<Pet> somePets){
@@ -102,18 +72,3 @@ void printPets (vector<Pet> somePets) {
     cout << endl;
 }
 
-int main(){
-    Pet dog("Tyzik", DOG, 5, "woof", 16);
-    Pet cat("Barsik", CAT, 3, "mur", 4);
-    Pet parrot("Kesha", PARROT, 1, "Hello stupid human!", 1);
-    Pet turtle("Anton", TURTLE, 112, " *none*", 3);
-    Pet hamster("Stepa", HAMSTER, 2, "pipipi", 1);
-    vector<Pet> somePets {dog, cat, parrot, turtle, hamster};
-    vector<Pet> pets {parrot, hamster, dog, cat};
-    ageSort(&somePets);
-    printPets(somePets); 
-    areFriends(pets);
-    Home SweetHome(somePets);
-    cout << parrot.isPolite() << endl;
-    return 0;
-}
